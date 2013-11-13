@@ -23,10 +23,19 @@ Search the file line by line and match each line with the given regex if matched
 		with    "vm.swappiness=60"
 	end
 
+file_append
+-----------
+
+Append a line to a file. It will not append the line if it is in the file already.
+
+	file_append "/etc/sysctl.conf" do
+		line "vm.swappiness=60"
+	end
+
 Attributes
 ----------
 
-Both definitions support the `notifies` attribute:
+All definitions support the `notifies` attribute:
 
 	file_replace "/etc/sysctl.conf" do
 		replace  "#net.ipv4.ip_forward=1"
