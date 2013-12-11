@@ -1,15 +1,16 @@
 define :file_replace do
+  file_path = params[:path] || params[:name]
 
 	ruby_block "#{params[:name]}" do
 		block do
-			file = Chef::Util::FileEdit.new(params[:name])
+			file = Chef::Util::FileEdit.new(file_path)
 			file.search_file_replace(
 				/#{params[:replace]}/,
 				(params[:with] or '')
 			)
 			file.write_file
 		end
-		only_if { ::File.read(params[:name]) =~ /#{params[:replace]}/ }
+		only_if { ::File.read(file_path) =~ /#{params[:replace]}/ }
 		
 		# Notify listener
 		if params[:notifies]
