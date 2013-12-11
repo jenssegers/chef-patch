@@ -1,15 +1,16 @@
 define :file_append do
+  file_path = params[:path] || params[:name]
 
 	ruby_block "#{params[:name]}" do
 		block do
 			begin
-				file = ::File.open(params[:name], "a")
+				file = ::File.open(file_path, "a")
 				file.puts params[:line]
 			ensure
 				file.close
 			end
 		end
-		not_if { ::File.exists?(params[:name]) && ::File.read(params[:name]) =~ /#{params[:line]}/ }
+		not_if { ::File.exists?(file_path) && ::File.read(file_path) =~ /#{params[:line]}/ }
 
 		# Notify listener
 		if params[:notifies]

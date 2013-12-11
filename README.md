@@ -35,6 +35,14 @@ Append a line to a file. It will not append the line if it is in the file alread
 Attributes
 ----------
 
+All definitions support the `path` attribute:
+
+	file_replace "unique_resource_name" do
+		replace  "#net.ipv4.ip_forward=1"
+		with     "net.ipv4.ip_forward=1"
+		path     "/etc/sysctl.conf"
+	end
+
 All definitions support the `notifies` attribute:
 
 	file_replace "/etc/sysctl.conf" do
