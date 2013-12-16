@@ -10,7 +10,7 @@ define :file_append do
 				file.close
 			end
 		end
-		not_if { ::File.exists?(file_path) && ::File.read(file_path) =~ /#{params[:line]}/ }
+		not_if { ::File.exists?(file_path) && ::File.read(file_path) =~ /#{Regexp.escape(params[:line])}/ }
 
 		# Notify listener
 		if params[:notifies]

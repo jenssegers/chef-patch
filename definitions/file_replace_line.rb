@@ -10,7 +10,7 @@ define :file_replace_line do
 			)
 			file.write_file
 		end
-		only_if { ::File.read(file_path) =~ /#{params[:replace]}/ }
+		only_if { ::File.read(file_path) =~ /#{Regexp.escape(params[:replace]})/ }
 		
 		# Notify listener
 		if params[:notifies]
