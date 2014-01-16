@@ -1,7 +1,7 @@
 Chef Filehelper
 ===============
 
-Some handy Chef definitions for when you want to replace text and lines in files.
+Some handy Chef custom resources for when you want to replace text and lines in files.
 
 file_replace
 ------------
@@ -35,7 +35,7 @@ Append a line to a file. It will not append the line if it is in the file alread
 Attributes
 ----------
 
-All definitions support the `path` attribute:
+All resources support the `path` attribute:
 
 	file_replace "unique_resource_name" do
 		replace  "#net.ipv4.ip_forward=1"
@@ -43,10 +43,10 @@ All definitions support the `path` attribute:
 		path     "/etc/sysctl.conf"
 	end
 
-All definitions support the `notifies` attribute:
+Testing
+-------
 
-	file_replace "/etc/sysctl.conf" do
-		replace  "#net.ipv4.ip_forward=1"
-		with     "net.ipv4.ip_forward=1"
-		notifies :restart, "service[networking]"
-	end
+Basic chefspec testing has been added.  Please include tests with your pull requests.
+
+`bundle install`
+`rspec`
