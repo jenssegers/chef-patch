@@ -42,3 +42,11 @@ All resources support the `path` attribute:
 		with     "net.ipv4.ip_forward=1"
 		path     "/etc/sysctl.conf"
 	end
+
+Testing
+-------
+
+Basic chefspec testing has been added.  Please include tests with your pull requests.
+
+`bundle install`
+`rspec`
