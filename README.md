@@ -1,7 +1,9 @@
-Chef Filehelper
+Chef File
 ===============
 
 Some handy Chef custom resources for when you want to replace text and lines in files.
+
+*As of version 2.0 the Filehelper cookbook was renamed File cookbook to accomodate a migration from definitions to custom LWRPs.*
 
 file_replace
 ------------
