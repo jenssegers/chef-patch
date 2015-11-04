@@ -1,5 +1,5 @@
-Chef File
-===============
+Patch
+=====
 
 Some handy Chef resources for when you want to append, replace or delete and lines in files.
 
