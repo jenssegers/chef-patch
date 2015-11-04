@@ -1,9 +1,42 @@
+resource_name 'replace_line'
 actions :run
 default_action :run
 
-attribute :name, :name_attribute => true, :kind_of => String, :required => true
-attribute :path, :kind_of => String
-attribute :replace, :kind_of => [String, Regexp], :required => true
-attribute :with, :kind_of => String
+property :name, :name_property => true, :kind_of => String, :required => true
+property :path, :kind_of => String
+property :replace, :kind_of => [String, Regexp], :required => true
+property :with, :kind_of => String, :required => true
 
-attr_accessor :exists
+action :run do
+
+	file_path = path || name
+
+	# Check if we got a regex or a string
+	if replace.is_a?(Regexp)
+		regex = replace
+	else
+		regex = Regexp.new(Regexp.escape(replace))
+	end
+
+	# Check if file matches the regex
+	if ::File.read(file_path) =~ regex
+
+		# Replace the line
+		converge_by("Replace line #{name}") do
+			ruby_block "#{name}" do
+				block do
+					file = Chef::Util::FileEdit.new(file_path)
+					file.search_file_replace_line(regex, with)
+					file.write_file
+				end
+			end
+		end
+
+		Chef::Log.info "- #{replace}"
+		Chef::Log.info "+ #{with}"
+
+		# Notify that a node was updated successfully
+		updated_by_last_action(true)
+
+	end
+end

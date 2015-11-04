@@ -5,13 +5,13 @@ describe 'test::replace' do
     File.stub(:read).and_call_original
     File.should_receive(:read).with("/test1").and_return('test')
     File.should_receive(:read).with("/test2/path.txt").and_return('test')
-    
-    ChefSpec::Runner.new(step_into: ['file_replace']).converge described_recipe
+
+    ChefSpec::Runner.new(step_into: ['replace']).converge described_recipe
   end
 
   context '/test1' do
-    it 'expect file_replace matcher to run' do
-      expect(chef_run).to run_file_replace('/test1')
+    it 'expect replace matcher to run' do
+      expect(chef_run).to run_replace('/test1')
     end
 
     it 'expect ruby block to run' do
@@ -20,8 +20,8 @@ describe 'test::replace' do
   end
 
   context 'test2' do
-    it 'expect file_replace matcher to run' do
-      expect(chef_run).to run_file_replace('test2')
+    it 'expect replace matcher to run' do
+      expect(chef_run).to run_replace('test2')
     end
 
     it 'expect ruby block to run' do
@@ -30,8 +30,8 @@ describe 'test::replace' do
   end
 
   context 'test3' do
-    it 'expect file_replace matcher to not run' do
-      expect(chef_run).not_to run_file_replace('test3')
+    it 'expect replace matcher to not run' do
+      expect(chef_run).not_to run_replace('test3')
     end
   end
 end

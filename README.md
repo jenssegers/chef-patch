@@ -5,39 +5,68 @@ Some handy Chef custom resources for when you want to replace text and lines in 
 
 *As of version 2.0 the Filehelper cookbook was renamed File cookbook to accomodate a migration from definitions to custom LWRPs.*
 
-file_replace
-------------
+replace
+-------
 
 Search the file line by line and match each line with the given regex if matched, replace the match (all occurances) with the replace parameter.
 
-	file_replace "/etc/sysctl.conf" do
+	replace "/etc/sysctl.conf" do
 		replace "#net.ipv4.ip_forward=1"
 		with    "net.ipv4.ip_forward=1"
 	end
 
-file_replace_line
------------------
+Or with a regex:
+
+	replace"/etc/sysctl.conf" do
+		replace /^.*ip_forward=.*$/
+		with    "net.ipv4.ip_forward=1"
+	end
+
+replace_line
+------------
 
 Search the file line by line and match each line with the given regex if matched, replace the whole line with the replace parameter.
 
-	file_replace_line "/etc/sysctl.conf" do
+	replace_line "/etc/sysctl.conf" do
 		replace "vm.swappiness"
 		with    "vm.swappiness=60"
 	end
 
-file_append
+Or with a regex:
+
+	replace_line "/etc/sysctl.conf" do
+		replace /.*vm.swappiness.*/
+		with    "vm.swappiness=60"
+	end
+
+append_line
 -----------
 
 Append a line to a file. It will not append the line if it is in the file already.
 
-	file_append "/etc/sysctl.conf" do
+	append_line "/etc/sysctl.conf" do
 		line "vm.swappiness=60"
+	end
+
+delete_line
+-----------
+
+Delete a line from a file.
+
+	delete_line "/etc/sysctl.conf" do
+		line "vm.swappiness=60"
+	end
+
+Or with a regex:
+
+	delete_line "/etc/sysctl.conf" do
+		line /.*vm.swappiness.*/
 	end
 
 Attributes
 ----------
 
-All resources support the `path` attribute:
+All resources support a `path` attribute to specify the location of the file if you have to do multiple operations on a file:
 
 	file_replace "unique_resource_name" do
 		replace  "#net.ipv4.ip_forward=1"
