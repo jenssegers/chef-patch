@@ -1,9 +1,7 @@
 Chef File
 ===============
 
-Some handy Chef custom resources for when you want to replace text and lines in files.
-
-*As of version 2.0 the Filehelper cookbook was renamed File cookbook to accomodate a migration from definitions to custom LWRPs.*
+Some handy Chef resources for when you want to append, replace or delete and lines in files.
 
 replace
 -------
@@ -68,7 +66,7 @@ Attributes
 
 All resources support a `path` attribute to specify the location of the file if you have to do multiple operations on a file:
 
-	file_replace "unique_resource_name" do
+	replace_line "unique_resource_name" do
 		replace  "#net.ipv4.ip_forward=1"
 		with     "net.ipv4.ip_forward=1"
 		path     "/etc/sysctl.conf"
