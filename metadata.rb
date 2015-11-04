@@ -1,7 +1,9 @@
 name             'patch'
 maintainer       'Jens Segers'
 maintainer_email ''
-license          ''
-description      'Some handy Chef resources for when you want to replace text and lines in files.'
+license          'MIT'
+description      'Some handy Chef resources for when you want to append, replace or delete and lines in files.'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '2.0'
+source_url       'https://github.com/jenssegers/chef-patch' if respond_to?(:source_url)
+issues_url       'https://github.com/jenssegers/chef-patch/issues' if respond_to?(:issues_url)
