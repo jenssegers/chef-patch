@@ -2,3 +2,5 @@
 
 .ruby-*
 .rvmrc
+Berksfile.lock
+Gemfile.lock
