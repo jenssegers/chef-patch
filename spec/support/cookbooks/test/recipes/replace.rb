@@ -5,7 +5,7 @@ end
 
 replace 'test2' do
   path '/test2/path.txt'
-  replace /test/
+  replace '/test/'
   with 'tested'
 end
 

@@ -4,7 +4,7 @@ end
 
 append_line 'test2' do
   path '/test2/path.txt'
-  line /test/
+  line '/test/'
 end
 
 append_line 'test3' do
