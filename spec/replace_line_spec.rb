@@ -6,7 +6,7 @@ describe 'test::replace_line' do
     File.should_receive(:read).with("/test1").and_return('test')
     File.should_receive(:read).with("/test2/path.txt").and_return('test')
 
-    ChefSpec::Runner.new(step_into: ['replace_line']).converge described_recipe
+    ChefSpec::SoloRunner.new(step_into: ['replace_line']).converge described_recipe
   end
 
   context '/test1' do
