@@ -2,11 +2,11 @@ require_relative 'spec_helper'
 
 describe 'test::replace_line' do
   let(:chef_run) do
-    File.stub(:read).and_call_original
-    File.should_receive(:read).with("/test1").and_return('test')
-    File.should_receive(:read).with("/test2/path.txt").and_return('test')
+    allow(File).to receive(:read).and_call_original
+    expect(File).to receive(:read).with("/test1").and_return('test')
+    expect(File).to receive(:read).with("/test2/path.txt").and_return('test')
 
-    ChefSpec::Runner.new(step_into: ['replace_line']).converge described_recipe
+    ChefSpec::SoloRunner.new(step_into: ['replace_line']).converge described_recipe
   end
 
   context '/test1' do

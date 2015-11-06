@@ -2,7 +2,7 @@ require_relative 'spec_helper'
 
 describe 'test::append' do
   let(:chef_run) do
-    ChefSpec::Runner.new(step_into: ['append_line']).converge described_recipe
+    ChefSpec::SoloRunner.new(step_into: ['append_line']).converge described_recipe
   end
 
   context '/test1' do
