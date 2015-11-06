@@ -11,4 +11,4 @@ rvm:
 before_script:
   - bundle exec berks install
 script:
-  - bundle exec rspec --color --format progress
+  - bundle exec rspec --color --format documentation
