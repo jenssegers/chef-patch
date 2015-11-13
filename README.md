@@ -1,6 +1,8 @@
 Patch
 =====
 
+[![Build Status](https://travis-ci.org/jenssegers/chef-patch.svg?branch=master)](https://travis-ci.org/jenssegers/chef-patch)
+
 Some handy Chef resources for when you want to append, replace or delete and lines in files.
 
 replace
