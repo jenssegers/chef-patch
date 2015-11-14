@@ -3,12 +3,13 @@ actions :run
 default_action :run
 
 property :name, :name_property => true, :kind_of => String, :required => true
+property :file, :kind_of => String
 property :path, :kind_of => String
 property :line, :kind_of => [String, Regexp], :required => true
 
 action :run do
 
-	file_path = path || name
+	file_path = file || path || name
 
 	# Check if we got a regex or a string
 	if line.is_a?(Regexp)

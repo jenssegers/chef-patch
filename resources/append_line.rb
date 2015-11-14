@@ -3,12 +3,13 @@ actions :run
 default_action :run
 
 property :name, :name_property => true, :kind_of => String, :required => true
+property :file, :kind_of => String
 property :path, :kind_of => String
 property :line, :kind_of => String, :required => true
 
 action :run do
 
-	file_path = path || name
+	file_path = file || path || name
 
 	# Check if the file already contains the line
 	unless ::File.exists?(file_path) && ::File.read(file_path) =~ /^#{Regexp.escape(line)}$/
