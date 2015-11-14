@@ -5,6 +5,8 @@ Patch
 
 Some handy Chef resources for when you want to append, replace or delete and lines in files.
 
+**WARNING**: Minimum Chef version required is 12.5
+
 replace
 -------
 
