@@ -28,6 +28,9 @@ action :run do
 					file = Chef::Util::FileEdit.new(file_path)
 					file.search_file_delete_line(regex)
 					file.write_file
+
+					# Remove backup file
+					::File.delete(file_path + ".old") if ::File.exist?(file_path + ".old")
 				end
 			end
 		end
