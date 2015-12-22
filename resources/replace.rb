@@ -9,38 +9,36 @@ property :replace, :kind_of => [String, Regexp], :required => true
 property :with, :kind_of => String, :required => true
 
 action :run do
+  file_path = file || path || name
 
-	file_path = file || path || name
+  # Check if we got a regex or a string
+  if replace.is_a?(Regexp)
+    regex = replace
+  else
+    regex = Regexp.new(Regexp.escape(replace))
+  end
 
-	# Check if we got a regex or a string
-	if replace.is_a?(Regexp)
-		regex = replace
-	else
-		regex = Regexp.new(Regexp.escape(replace))
-	end
+  # Check if file matches the regex
+  if ::File.read(file_path) =~ regex
 
-	# Check if file matches the regex
-	if ::File.read(file_path) =~ regex
+    # Replace the matching text
+    converge_by("Replace #{name}") do
+      ruby_block name do
+        block do
+          file = Chef::Util::FileEdit.new(file_path)
+          file.search_file_replace(regex, with)
+          file.write_file
 
-		# Replace the matching text
-		converge_by("Replace #{name}") do
-			ruby_block "#{name}" do
-				block do
-					file = Chef::Util::FileEdit.new(file_path)
-					file.search_file_replace(regex, with)
-					file.write_file
+          # Remove backup file
+          ::File.delete(file_path + '.old') if ::File.exist?(file_path + '.old')
+        end
+      end
+    end
 
-					# Remove backup file
-					::File.delete(file_path + ".old") if ::File.exist?(file_path + ".old")
-				end
-			end
-		end
+    Chef::Log.info "- #{replace}"
+    Chef::Log.info "+ #{with}"
 
-		Chef::Log.info "- #{replace}"
-		Chef::Log.info "+ #{with}"
-
-		# Notify that a node was updated successfully
-		updated_by_last_action(true)
-
-	end
+    # Notify that a node was updated successfully
+    updated_by_last_action(true)
+  end
 end

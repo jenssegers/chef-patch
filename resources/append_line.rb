@@ -8,30 +8,29 @@ property :path, :kind_of => String
 property :line, :kind_of => String, :required => true
 
 action :run do
+  file_path = file || path || name
 
-	file_path = file || path || name
+  # Check if the file already contains the line
+  unless ::File.exist?(file_path) && ::File.read(file_path) =~ /^#{Regexp.escape(line)}$/
 
-	# Check if the file already contains the line
-	unless ::File.exists?(file_path) && ::File.read(file_path) =~ /^#{Regexp.escape(line)}$/
+    # Append to file
+    converge_by("Append #{name}") do
+      ruby_block name do
+        block do
+          begin
+            file = ::File.open(file_path, 'a')
+            file.puts line
+          ensure
+            file.close
+          end
+        end
+      end
+    end
 
-		# Append to file
-		converge_by("Append #{name}") do
-			ruby_block "#{name}" do
-				block do
-					begin
-						file = ::File.open(file_path, "a")
-						file.puts line
-					ensure
-						file.close
-					end
-				end
-			end
-		end
+    Chef::Log.info "+ #{line}"
 
-		Chef::Log.info "+ #{line}"
+    # Notify that a node was updated successfully
+    updated_by_last_action(true)
 
-		# Notify that a node was updated successfully
-		updated_by_last_action(true)
-
-	end
+  end
 end
