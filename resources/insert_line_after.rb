@@ -1,4 +1,4 @@
-resource_name 'insert_line_after_match'
+resource_name 'insert_line_after'
 actions :run
 default_action :run
 
@@ -25,11 +25,11 @@ action :run do
 	if ::File.read(file_path) =~ regex
 
 		# Replace the matching text
-		converge_by("insert_line_after_match #{name}") do
+		converge_by("insert_line_after #{name}") do
 			ruby_block "#{name}" do
 				block do
 					file = Chef::Util::FileEdit.new(file_path)
-					file.insert_line_after_match(regex, insert)
+					file.insert_line_after(regex, insert)
 					file.write_file
         end
 			end
