@@ -49,6 +49,16 @@ Append a line to a file. It will not append the line if it is in the file alread
 	append_line "/etc/sysctl.conf" do
 		line "vm.swappiness=60"
 	end
+	
+inser_line_after_match
+-----------
+
+Append a line to a file. It will not append the line if it is in the file already.
+
+	insert_line_after_match "/etc/sysctl.conf" do
+		line "vm.swappiness=60"
+		insert "net.ipv4.ip_forward = 1"
+	end	
 
 delete_line
 -----------
