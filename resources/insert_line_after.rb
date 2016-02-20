@@ -19,8 +19,6 @@ action :run do
 		regex = Regexp.new(Regexp.escape(line))
 	end
 
-	unless ::File.exists?(file_path) && ::File.foreach(file_path).grep(/#{insert}/).size > 0
-
 	# Check if file matches the regex
 	if ::File.read(file_path) =~ regex
 
