@@ -17,7 +17,7 @@ action :run do
 		regex = line
 	else
 		regex = Regexp.new(Regexp.escape(line))
-  end
+	end
 
 	unless ::File.exists?(file_path) && ::File.foreach(file_path).grep(/#{insert}/).size > 0
 
@@ -31,7 +31,7 @@ action :run do
 					file = Chef::Util::FileEdit.new(file_path)
 					file.insert_line_after(regex, insert)
 					file.write_file
-        end
+				end
 			end
 		end
 
@@ -40,9 +40,5 @@ action :run do
 		# Notify that a node was updated successfully
 		updated_by_last_action(true)
 
-  end
-
-	# Chef::Log.warn "wiebenik + #{regins}"
-	# Chef::Log.warn "watbenik - #{regex}"
-  end
+	end
 end
