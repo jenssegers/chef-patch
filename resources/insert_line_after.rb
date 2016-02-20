@@ -27,7 +27,7 @@ action :run do
 			ruby_block "#{name}" do
 				block do
 					file = Chef::Util::FileEdit.new(file_path)
-					file.insert_line_after(regex, insert)
+					file.insert_line_after_match(regex, insert)
 					file.write_file
 				end
 			end
