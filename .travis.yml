@@ -8,14 +8,14 @@ rvm:
   - 2.0.0
   - 2.1
   - 2.2.3
-  
+
 matrix:
   allow_failures:
     - rvm: 2.0.0
     - rvm: 2.1
-  
+
 before_script:
   - bundle exec berks install
-  
+
 script:
   - bundle exec rspec --color --format documentation
