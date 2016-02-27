@@ -11,12 +11,7 @@ action :run do
 
 	file_path = file || path || name
 
-	# Check if we got a regex or a string
-	if line.is_a?(Regexp)
-		regex = line
-	else
-		regex = Regexp.new(Regexp.escape(line))
-	end
+	regex = /^#{Regexp.escape(line)}$/
 
 	# Check if file matches the regex
 	if ::File.read(file_path) !~ regex

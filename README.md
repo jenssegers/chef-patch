@@ -19,7 +19,7 @@ Search the file line by line and match each line with the given regex if matched
 
 Or with a regex:
 
-	replace"/etc/sysctl.conf" do
+	replace "/etc/sysctl.conf" do
 		replace /^.*ip_forward=.*$/
 		with    "net.ipv4.ip_forward=1"
 	end
