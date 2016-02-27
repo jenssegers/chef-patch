@@ -13,19 +13,11 @@ describe 'test::append' do
     it 'expect append_line matcher to run' do
       expect(chef_run).to run_append_line('/test1')
     end
-
-    it 'expect ruby block to run' do
-      expect(chef_run).to run_ruby_block('/test1')
-    end
   end
 
   context 'test2' do
     it 'expect append_line matcher to run' do
       expect(chef_run).to run_append_line('test2')
-    end
-
-    it 'expect ruby block to run' do
-      expect(chef_run).to run_ruby_block('test2')
     end
   end
 

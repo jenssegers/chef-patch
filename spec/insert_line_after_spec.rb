@@ -13,20 +13,12 @@ describe 'test::insert_line_after' do
     it 'expect insert_line_after matcher to run' do
       expect(chef_run).to run_insert_line_after('/test1')
     end
-
-    it 'expect ruby block to run' do
-      expect(chef_run).to run_ruby_block('/test1')
-    end
   end
 
   context 'test2' do
     it 'expect insert_line_after matcher to run' do
       expect(chef_run).to run_insert_line_after('test2')
     end
-    ## TODO: test fails
-    # it 'expect ruby block to run' do
-    #   expect(chef_run).to run_ruby_block('test2')
-    # end
   end
 
   context 'test3' do

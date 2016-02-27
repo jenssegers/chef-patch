@@ -13,19 +13,11 @@ describe 'test::replace_line' do
     it 'expect replace_line matcher to run' do
       expect(chef_run).to run_replace_line('/test1')
     end
-
-    it 'expect ruby block to run' do
-      expect(chef_run).to run_ruby_block('/test1')
-    end
   end
 
   context 'test2' do
     it 'expect replace_line matcher to run' do
       expect(chef_run).to run_replace_line('test2')
-    end
-
-    it 'expect ruby block to run' do
-      expect(chef_run).to run_ruby_block('test2')
     end
   end
 
