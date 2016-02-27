@@ -1,7 +1,7 @@
 Patch
 =====
 
-[![Build Status](https://travis-ci.org/jenssegers/chef-patch.svg?branch=master)](https://travis-ci.org/jenssegers/chef-patch)
+[![Build Status](https://img.shields.io/cookbook/v/patch.svg)](https://supermarket.chef.io/cookbooks/patch) [![Build Status](https://travis-ci.org/jenssegers/chef-patch.svg?branch=master)](https://travis-ci.org/jenssegers/chef-patch)
 
 Some handy Chef resources for when you want to append, replace or delete and lines in files.
 
@@ -49,7 +49,7 @@ Append a line to a file. It will not append the line if it is in the file alread
 	append_line "/etc/sysctl.conf" do
 		line "vm.swappiness=60"
 	end
-	
+
 inser_line_after
 -----------
 
@@ -58,7 +58,7 @@ Append a line to a file. It will not append the line if it is in the file alread
 	insert_line_after "/etc/sysctl.conf" do
 		line "vm.swappiness=60"
 		insert "net.ipv4.ip_forward = 1"
-	end	
+	end
 
 delete_line
 -----------
