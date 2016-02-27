@@ -18,24 +18,28 @@ action :run do
 		regex = Regexp.new(Regexp.escape(line))
 	end
 
-	# Replace the matching text
-	converge_by("insert_line_if_no_match #{name}") do
-		ruby_block "#{name}" do
-			block do
-				file = Chef::Util::FileEdit.new(file_path)
-				file.insert_line_if_no_match(regex, line)
+	# Check if file matches the regex
+	if ::File.read(file_path) !~ regex
 
-				# Write to file if something has changed
-				if file.unwritten_changes?()
-					file.write_file
+		# Replace the matching text
+		converge_by("insert_line_if_no_match #{name}") do
+			ruby_block "#{name}" do
+				block do
+					file = Chef::Util::FileEdit.new(file_path)
+					file.insert_line_if_no_match(regex, line)
 
-					Chef::Log.info "+ #{line}"
+					# Write to file if something has changed
+					if file.unwritten_changes?()
+						file.write_file
 
-					# Notify that a node was updated successfully
-					updated_by_last_action(true)
+						Chef::Log.info "+ #{line}"
 
-					# Remove backup file
-					::File.delete(file_path + ".old") if ::File.exist?(file_path + ".old")
+						# Notify that a node was updated successfully
+						updated_by_last_action(true)
+
+						# Remove backup file
+						::File.delete(file_path + ".old") if ::File.exist?(file_path + ".old")
+					end
 				end
 			end
 		end
