@@ -11,27 +11,34 @@ action :run do
 
 	file_path = file || path || name
 
-	# Check if the file already contains the line
-	unless ::File.exists?(file_path) && ::File.read(file_path) =~ /^#{Regexp.escape(line)}$/
+	# Check if we got a regex or a string
+	if line.is_a?(Regexp)
+		regex = line
+	else
+		regex = Regexp.new(Regexp.escape(line))
+	end
 
-		# Append to file
-		converge_by("Append #{name}") do
-			ruby_block "#{name}" do
-				block do
-					begin
-						file = ::File.open(file_path, "a")
-						file.puts line
-					ensure
-						file.close
-					end
+	# Replace the matching text
+	converge_by("insert_line_if_no_match #{name}") do
+		ruby_block "#{name}" do
+			block do
+				file = Chef::Util::FileEdit.new(file_path)
+				file.insert_line_if_no_match(regex, line)
+
+				# Write to file if something has changed
+				if file.unwritten_changes?()
+					file.write_file
+
+					Chef::Log.info "+ #{line}"
+
+					# Notify that a node was updated successfully
+					updated_by_last_action(true)
+
+					# Remove backup file
+					::File.delete(file_path + ".old") if ::File.exist?(file_path + ".old")
 				end
 			end
 		end
-
-		Chef::Log.info "+ #{line}"
-
-		# Notify that a node was updated successfully
-		updated_by_last_action(true)
-
 	end
 end
+
