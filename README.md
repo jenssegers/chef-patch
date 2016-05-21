@@ -50,7 +50,7 @@ Append a line to a file. It will not append the line if it is in the file alread
 		line "vm.swappiness=60"
 	end
 
-inser_line_after
+insert_line_after
 -----------
 
 Append a line to a file. It will not append the line if it is in the file already.
