@@ -1,4 +1,4 @@
-name             'patch'
+name             'chef-patch'
 maintainer       'Jens Segers'
 maintainer_email ''
 license          'MIT'

@@ -14,4 +14,8 @@ if defined?(ChefSpec)
   def run_replace_line(resource_name)
     ChefSpec::Matchers::ResourceMatcher.new(:replace_line, :run, resource_name)
   end
+
+  def run_replace_line_or_add(resource_name)
+    ChefSpec::Matchers::ResourceMatcher.new(:replace_line_or_add, :run, resource_name)
+  end
 end
