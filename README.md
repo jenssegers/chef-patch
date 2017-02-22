@@ -48,14 +48,14 @@ replace_line_or_add
 Search the file line by line and match each line with the given regex if matched, replace the whole line with the replace parameter.
 If no match is found, add entry like the append_line resource
 
-        replace_line "/etc/sysctl.conf" do
+        replace_line_or_add "/etc/sysctl.conf" do
                 replace "vm.swappiness"
                 with    "vm.swappiness=60"
         end
 
 Or with a regex:
 
-        replace_line "/etc/sysctl.conf" do
+        replace_line_or_add "/etc/sysctl.conf" do
                 replace /.*vm.swappiness.*/
                 with    "vm.swappiness=60"
         end
