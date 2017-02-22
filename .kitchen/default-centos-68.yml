@@ -1,9 +1,0 @@
----
-username: kitchen
-ssh_key: "/devops/ontwikkeling/chef-patch/.kitchen/docker_id_rsa"
-image_id: c69f12f80808
-container_id: c7fef2510a83707964aeb2cb20f912258cecd3e26af48e7adeab66fb7dc8b76e
-hostname: localhost
-port: 32768
-last_action: converge
-last_error: 
