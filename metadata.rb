@@ -9,7 +9,7 @@ source_url       'https://github.com/jenssegers/chef-patch'
 issues_url       'https://github.com/jenssegers/chef-patch/issues'
 
 %w(amazon centos debian fedora redhat scientific ubuntu).each do |os|
-	supports os
+  supports os
 end
 
 chef_version '>= 12.5'
