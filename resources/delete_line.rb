@@ -1,6 +1,4 @@
 resource_name 'delete_line'
-actions :run
-default_action :run
 
 property :file, :kind_of => String
 property :path, :kind_of => String
