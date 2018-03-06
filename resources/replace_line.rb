@@ -2,7 +2,6 @@ resource_name 'replace_line'
 actions :run
 default_action :run
 
-property :name, :name_property => true, :kind_of => String, :required => true
 property :file, :kind_of => String
 property :path, :kind_of => String
 property :replace, :kind_of => [String, Regexp], :required => true
