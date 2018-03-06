@@ -1,8 +1,8 @@
 resource_name 'delete_line'
 
-property :file, :kind_of => String
-property :path, :kind_of => String
-property :line, :kind_of => [String, Regexp], :required => true
+property :file, String
+property :path, String
+property :line, [String, Regexp], required: true
 
 action :run do
 

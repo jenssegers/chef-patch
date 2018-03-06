@@ -1,9 +1,9 @@
 resource_name 'replace'
 
-property :file, :kind_of => String
-property :path, :kind_of => String
-property :replace, :kind_of => [String, Regexp], :required => true
-property :with, :kind_of => String, :required => true
+property :file, String
+property :path, String
+property :replace, [String, Regexp], required: true
+property :with, String, required: true
 
 action :run do
 

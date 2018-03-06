@@ -1,9 +1,9 @@
 resource_name 'insert_line_after'
 
-property :file, :kind_of => String
-property :path, :kind_of => String
-property :line, :kind_of => [String, Regexp], :required => true
-property :insert, :kind_of => String, :required => true
+property :file, String
+property :path, String
+property :line, [String, Regexp], required: true
+property :insert, String, required: true
 
 action :run do
 

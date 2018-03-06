@@ -1,8 +1,8 @@
 resource_name 'append_line'
 
-property :file, :kind_of => String
-property :path, :kind_of => String
-property :line, :kind_of => String, :required => true
+property :file, String
+property :path, String
+property :line, String, required: true
 
 action :run do
 
