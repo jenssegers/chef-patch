@@ -9,10 +9,10 @@ action :run do
   file_path = new_resource.file || new_resource.path || new_resource.name
 
   # Check if we got a regex or a string
-  regex = if line.is_a?(Regexp)
-            line
+  regex = if new_resource.line.is_a?(Regexp)
+            new_resource.line
           else
-            Regexp.new(Regexp.escape(line))
+            Regexp.new(Regexp.escape(new_resource.line))
           end
 
   # Check if file matches the regex

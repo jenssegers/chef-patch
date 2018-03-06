@@ -8,7 +8,7 @@ action :run do
   file_path = new_resource.file || new_resource.path || new_resource.name
 
   # Line matching regex
-  regex = /^#{Regexp.escape(line)}$/
+  regex = /^#{Regexp.escape(new_resource.line)}$/
 
   # Check if file matches the regex
   if ::File.read(file_path) !~ regex
@@ -17,12 +17,12 @@ action :run do
 
     # Do changes
     file = Chef::Util::FileEdit.new(file_path)
-    file.insert_line_if_no_match(regex, line)
+    file.insert_line_if_no_match(regex, new_resource.line)
     file.write_file
 
     # Notify file changes
     if Digest::SHA256.file(file_path).hexdigest != before
-      Chef::Log.info "+ #{line}"
+      Chef::Log.info "+ #{new_resource.line}"
       updated_by_last_action(true)
     end
 

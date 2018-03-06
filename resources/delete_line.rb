@@ -8,10 +8,10 @@ action :run do
   file_path = new_resource.file || new_resource.path || new_resource.name
 
   # Check if we got a regex or a string
-  regex = if line.is_a?(Regexp)
-            line
+  regex = if new_resource.line.is_a?(Regexp)
+            new_resource.line
           else
-            Regexp.new(Regexp.escape(line))
+            Regexp.new(Regexp.escape(new_resource.line))
           end
 
   # Check if file matches the regex
@@ -26,7 +26,7 @@ action :run do
 
     # Notify file changes
     if Digest::SHA256.file(file_path).hexdigest != before
-      Chef::Log.info "- #{line}"
+      Chef::Log.info "- #{new_resource.line}"
       updated_by_last_action(true)
     end
 
